@@ -9,17 +9,16 @@ const refs = {
   input: document.querySelector('#controls input'),
 };
 
-refs.createBtn.addEventListener('blur', boxQuantity);
+refs.createBtn.addEventListener('click', boxQuantity);
 refs.createBtn.addEventListener('click', createBoxes);
 refs.destroyBtn.addEventListener('click', destroyBoxes);
 
-function boxQuantity(event) {
-  return Number(event.currentTarget.value);
+function boxQuantity() {
+  refs.createBtn.setAttribute('data-quantity', Number(refs.input.value));
 }
 
-console.log(boxQuantity());
-
-function createBoxes(amount) {
+function createBoxes() {
+  const amount = refs.createBtn.dataset.quantity;
   const boxes = [];
   let width = 30;
   let height = 30;
@@ -34,8 +33,6 @@ function createBoxes(amount) {
 
   const boxDivString = boxes.join(' ');
   refs.boxesDiv.insertAdjacentHTML('beforeend', boxDivString);
-
-  console.log(boxes);
 }
 
 function destroyBoxes() {
